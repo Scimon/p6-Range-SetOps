@@ -24,17 +24,6 @@ IMPLEMENTED OPERATORS
 
 Both implemented for Int's and Rationals in both Int based and Rational ranges. Also works with Date and String based ranges.
 
-### sub infix:<∈>
-
-```
-sub infix:<∈>(
-    Any:D $a where { ... }, 
-    Range:D $b
-) returns Bool
-```
-
-∈
-
 AUTHOR
 ======
 
