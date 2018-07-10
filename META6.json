@@ -1,0 +1,20 @@
+{
+  "auth" : "cpan:SCIMON",
+  "authors" : [
+    "Simon Proctor"
+  ],
+  "build-depends" : [ ],
+  "depends" : [ ],
+  "description" : "blah blah blah",
+  "license" : "Artistic-2.0",
+  "name" : "Range::SetOps",
+  "perl" : "6.c",
+  "provides" : {
+    "Range::SetOps" : "lib/Range/SetOps.pm6"
+  },
+  "resources" : [ ],
+  "source-url" : "https://github.com/Scimon/perl6.git",
+  "tags" : [ ],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
+}
