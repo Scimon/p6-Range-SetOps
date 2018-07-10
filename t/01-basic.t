@@ -1,7 +1,6 @@
 use v6.c;
 use Test;
-use Range::SetOps;
 
-pass "replace me";
+use-ok "Range::SetOps";
 
 done-testing;

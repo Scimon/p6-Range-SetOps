@@ -5,7 +5,7 @@
   ],
   "build-depends" : [ ],
   "depends" : [ ],
-  "description" : "blah blah blah",
+  "description" : "Provides set operators geared to work on ranges.",
   "license" : "Artistic-2.0",
   "name" : "Range::SetOps",
   "perl" : "6.c",
