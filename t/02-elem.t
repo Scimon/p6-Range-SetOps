@@ -12,8 +12,11 @@ my @ok = [
 ];
 
 for @ok -> [ $test, $range ] {
-    ok $test (elem) $range, "ok {$test} (elem) {$range.gist}";
-    ok $test ∈ $range, "ok {$test} ∈ {$range.gist}";
+    ok $test (elem) $range, "ok {$test.perl} (elem) {$range.gist}";
+    ok $test ∈ $range, "ok {$test.perl} ∈ {$range.gist}";
+    nok $test !(elem) $range, "nok {$test.perl} !(elem) {$range}";
+    nok $test ∉ $range, "nok {$test.perl} ∉ {$range.gist}";
+
 }
 
 my @nok = [
@@ -26,8 +29,10 @@ my @nok = [
 ];
 
 for @nok -> [ $test, $range ] {
-    nok $test (elem) $range, "nok {$test} (elem) {$range.gist}";
-    nok $test ∈ $range, "nok {$test} ∈ {$range.gist}";
+    nok $test (elem) $range, "nok {$test.perl} (elem) {$range.gist}";
+    nok $test ∈ $range, "nok {$test.perl} ∈ {$range.gist}";
+    ok $test !(elem) $range, "ok {$test.perl} !(elem) {$range}";
+    ok $test ∉ $range, "ok {$test.perl} ∈ {$range.gist}";
 }
 
 

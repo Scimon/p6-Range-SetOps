@@ -24,31 +24,47 @@ The Range::SetOps module aims to provide operators based on the Set operators bu
 
 =begin pod
 
-=head1 (elem) and ∈ 
+=head1 (elem), ∈ and ∉
 
 Both implemented for Int's and Rationals in both Int based and Rational ranges. Also works with Date and String based ranges.
 
 =end pod
 
-multi sub infix:<(elem)> (Int:D() $a where * ~~ Int, Range:D $b --> Bool) is export {
+sub num_elem( $a, Range:D $b --> Bool ) {
     $a >= $b.min && $a <= $b.max;
 }
 
-multi sub infix:<(elem)> (Rational:D() $a where * ~~ Rational, Range:D $b --> Bool) is export {
-    $a >= $b.min && $a <= $b.max;
-}
-
-multi sub infix:<(elem)> ($a, Range:D $b --> Bool) is export {
+sub non_num_elem( $a, Range:D $b --> Bool ) {
     $a ge $b.min && $a le $b.max;
 }
 
-multi sub infix:<∈> (Int:D() $a where * ~~ Int, Range:D $b --> Bool) is export {
-    $a (elem) $b;
+multi sub infix:<(elem)> (Int:D $a where * ~~ Int, Range:D $b --> Bool) is export { num_elem( $a, $b ); }
+multi sub infix:<(elem)> (Rational:D $a where * ~~ Rational, Range:D $b --> Bool) is export { num_elem( $a, $b ); }
+multi sub infix:<(elem)> (Numeric:D $a, Range:D $b --> Bool) is export { num_elem( $a, $b ); }
+multi sub infix:<(elem)> (Date:D $a, Range:D $b --> Bool) is export { num_elem( $a, $b); }
+multi sub infix:<(elem)> (Str:D $a, Range:D $b --> Bool) is export {
+    my $ra = Rat($a);
+    if ( defined $ra ) {
+        num_elem( $ra, $b )
+    } else {
+        non_num_elem( $a, $b );
+    }
 }
 
-multi sub infix:<∈> ($a, Range:D $b --> Bool) is export {
-    $a (elem) $b;
+multi sub infix:<∈> (Int:D $a where * ~~ Int, Range:D $b --> Bool) is export { num_elem( $a, $b ); }
+multi sub infix:<∈> (Rational:D $a where * ~~ Rational, Range:D $b --> Bool) is export { num_elem( $a, $b ); }
+multi sub infix:<∈> (Numeric:D $a, Range:D $b --> Bool) is export { num_elem( $a, $b ); }
+multi sub infix:<∈> (Date:D $a, Range:D $b --> Bool) is export { num_elem( $a, $b); }
+multi sub infix:<∈> (Str:D $a, Range:D $b --> Bool) is export {
+    my $ra = Rat($a);
+    if ( defined $ra ) {
+        num_elem( $ra, $b );
+    } else {
+        non_num_elem( $a, $b );
+    }
 }
+
+multi sub infix:<∉> (Any:D $a, Range:D $b --> Bool) is export { $a !(elem) $b; }
 
 =begin pod
 

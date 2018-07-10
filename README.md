@@ -19,8 +19,8 @@ The standard Set operators work on Ranges by first converting them to lists and 
 IMPLEMENTED OPERATORS
 =====================
 
-(elem) and ∈ 
-=============
+(elem), ∈ and ∉
+===============
 
 Both implemented for Int's and Rationals in both Int based and Rational ranges. Also works with Date and String based ranges.
 
