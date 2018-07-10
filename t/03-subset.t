@@ -11,5 +11,9 @@ my @equal = [
     [ (Date.new("2018-01-01")..Date.new("2018-12-31")), (Date.new("2018-01-01")..Date.new("2018-12-31")) ],
 ];
 
+for @equal -> [ $a, $b ] {
+    ok $a == $b, "ok {$a.perl} == {$b.perl}";
+}
+
 done-testing;
 

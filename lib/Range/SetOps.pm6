@@ -76,8 +76,6 @@ multi sub infix:<∈> (Str:D $a, Range:D $b --> Bool) is export {
 }
 
 multi sub infix:<∉> (Any:D $a, Range:D $b --> Bool) is export { $a !(elem) $b; }
-
 multi sub infix:<(cont)> (Range:D $a, Any:D $b --> Bool ) is export { $b (elem) $a; }
 multi sub infix:<∋> (Range:D $a, Any:D $b --> Bool ) is export { $b (elem) $a; }
 multi sub infix:<∌> (Range:D $a, Any:D $b --> Bool ) is export { $b !(elem) $a; }
-
