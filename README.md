@@ -19,10 +19,19 @@ The standard Set operators work on Ranges by first converting them to lists and 
 IMPLEMENTED OPERATORS
 =====================
 
-(elem), ∈ and ∉
-===============
+The following operators have been implemented for continous numerical ranges and also tested on string and date range.
 
-Both implemented for Int's and Rationals in both Int based and Rational ranges. Also works with Date and String based ranges.
+  * (elem)
+
+  * ∈
+
+  * ∉
+
+  * (cont)
+
+  * ∋
+
+  * ∌
 
 AUTHOR
 ======

@@ -20,13 +20,24 @@ The Range::SetOps module aims to provide operators based on the Set operators bu
 
 =head1 IMPLEMENTED OPERATORS
 
-=end pod
+The following operators have been implemented for continous numerical ranges and also tested on string and date range.
 
-=begin pod
+=item (elem)
+=item ∈
+=item ∉
+=item (cont)
+=item ∋
+=item ∌
 
-=head1 (elem), ∈ and ∉
+=head1 AUTHOR
 
-Both implemented for Int's and Rationals in both Int based and Rational ranges. Also works with Date and String based ranges.
+Simon Proctor <simon.proctor@gmail.com>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2018 Simon Proctor
+
+This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
 
 =end pod
 
@@ -66,16 +77,7 @@ multi sub infix:<∈> (Str:D $a, Range:D $b --> Bool) is export {
 
 multi sub infix:<∉> (Any:D $a, Range:D $b --> Bool) is export { $a !(elem) $b; }
 
-=begin pod
+multi sub infix:<(cont)> (Range:D $a, Any:D $b --> Bool ) is export { $b (elem) $a; }
+multi sub infix:<∋> (Range:D $a, Any:D $b --> Bool ) is export { $b (elem) $a; }
+multi sub infix:<∌> (Range:D $a, Any:D $b --> Bool ) is export { $b !(elem) $a; }
 
-=head1 AUTHOR
-
-Simon Proctor <simon.proctor@gmail.com>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright 2018 Simon Proctor
-
-This library is free software; you can redistribute it and/or modify it under the Artistic License 2.0.
-
-=end pod
