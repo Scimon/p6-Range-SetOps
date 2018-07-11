@@ -10,6 +10,7 @@
   "name" : "Range::SetOps",
   "perl" : "6.c",
   "provides" : {
+    "Range::.#SetOps" : "lib/Range/.#SetOps.pm6",
     "Range::SetOps" : "lib/Range/SetOps.pm6"
   },
   "resources" : [ ],

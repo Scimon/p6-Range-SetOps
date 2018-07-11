@@ -29,6 +29,21 @@ The following operators have been implemented for continous numerical ranges and
 =item ∋
 =item ∌
 
+The follwoing operators already work for continuous Ranges.
+
+=item (<=)
+=item ⊆
+=item (>=)
+=item ⊇
+=item (<)
+=item ⊂
+=item (>)
+=item ⊃
+=item ⊅
+=item ⊄
+=item ⊉
+=item ⊈
+
 =head1 AUTHOR
 
 Simon Proctor <simon.proctor@gmail.com>

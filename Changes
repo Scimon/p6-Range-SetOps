@@ -2,3 +2,4 @@ Revision history for Range-SetOps
 
 {{$NEXT}}
     - Initial version
+    - All Boolean returning Operators implemented. 
