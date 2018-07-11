@@ -21,7 +21,7 @@ for @equal -> [ $a, $b ] {
     ok $a (>=) $b, "ok {$a.perl} (>=) {$b.perl}";
     ok $b (>=) $a, "ok {$b.perl} (>=) {$a.perl}";
     ok $a ⊇ $b, "ok {$a.perl} ⊇ {$b.perl}";
-    ok $b ⊇ $a, "ok {$b.perl} ⊇ {$a.perl}";    
+    ok $b ⊇ $a, "ok {$b.perl} ⊇ {$a.perl}";
 }
 
 my @subsets = [

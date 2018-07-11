@@ -33,6 +33,32 @@ The following operators have been implemented for continous numerical ranges and
 
   * ∌
 
+The following operators already work for continuous Ranges.
+
+  * (<=)
+
+  * ⊆
+
+  * (>=)
+
+  * ⊇
+
+  * (<)
+
+  * ⊂
+
+  * (>)
+
+  * ⊃
+
+  * ⊅
+
+  * ⊄
+
+  * ⊉
+
+  * ⊈
+
 AUTHOR
 ======
 

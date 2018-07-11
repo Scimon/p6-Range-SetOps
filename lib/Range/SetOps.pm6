@@ -29,7 +29,7 @@ The following operators have been implemented for continous numerical ranges and
 =item ∋
 =item ∌
 
-The follwoing operators already work for continuous Ranges.
+The following operators already work for continuous Ranges.
 
 =item (<=)
 =item ⊆
@@ -94,3 +94,7 @@ multi sub infix:<∉> (Any:D $a, Range:D $b --> Bool) is export { $a !(elem) $b;
 multi sub infix:<(cont)> (Range:D $a, Any:D $b --> Bool ) is export { $b (elem) $a; }
 multi sub infix:<∋> (Range:D $a, Any:D $b --> Bool ) is export { $b (elem) $a; }
 multi sub infix:<∌> (Range:D $a, Any:D $b --> Bool ) is export { $b !(elem) $a; }
+
+multi sub infix:<(&)> (Range:D $a, Range:D $b --> Range ) is export {
+    3..5;
+}
