@@ -9,12 +9,13 @@ my @ok = [
     [Date.new("2018-03-06"),(Date.new("2018-01-01")..Date.new("2018-12-31"))],
     ["5",(1..10)], ["5",(2.5..10)], ["5",(2..10.5)],
     ["5.5",(1..10)], ["5.5",(2.5..10)], ["5.5",(2.7..10)], ["5.5",(2.5..10.8)], ["5.5",(2.7..10.8)],
+    [5,Set($=(1..3),$=(5..6))]
 ];
 
 for @ok -> [ $test, $range ] {
     ok $test (elem) $range, "ok {$test.perl} (elem) {$range.gist}";
     ok $test ∈ $range, "ok {$test.perl} ∈ {$range.gist}";
-    nok $test !(elem) $range, "nok {$test.perl} !(elem) {$range}";
+    nok $test !(elem) $range, "nok {$test.perl} !(elem) {$range.gist}";
     nok $test ∉ $range, "nok {$test.perl} ∉ {$range.gist}";
 
     ok $range (cont) $test, "ok {$range.gist} (cont) {$test.perl}";

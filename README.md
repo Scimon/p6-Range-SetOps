@@ -14,7 +14,7 @@ SYNOPSIS
 DESCRIPTION
 ===========
 
-The standard Set operators work on Ranges by first converting them to lists and then applying the set operations to these lists. But Ranges can also represent a Range of possibly values for ehich this type of comparison does not work well. The Range::SetOps module aims to provide operators based on the Set operators but geared to work on Ranges without list conversion.
+The standard Set operators work on Ranges by first converting them to lists and then applying the set operations to these lists. But Ranges can also represent a Range of possible values for which this type of comparison does not work well. The Range::SetOps module aims to provide operators based on the Set operators but geared to work on Ranges without list conversion.
 
 IMPLEMENTED OPERATORS
 =====================
@@ -33,7 +33,7 @@ The following operators have been implemented for continous numerical ranges and
 
   * ∌
 
-The following operators already work for continuous Ranges.
+The following operators already work for continuous Ranges as expected.
 
   * (<=)
 
@@ -58,6 +58,8 @@ The following operators already work for continuous Ranges.
   * ⊉
 
   * ⊈
+
+The following Operations will return Sets comprising one or more Ranges. When the Ranges within the Set overlap they will be combined into one larger Range.
 
 AUTHOR
 ======
