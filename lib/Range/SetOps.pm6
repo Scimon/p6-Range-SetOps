@@ -122,9 +122,35 @@ multi sub infix:<(|)> (Range:D $a, Range $b where $b (<) $a --> Set ) is export 
 multi sub infix:<(|)> (Range:D $a, Range $b --> Set ) is export is pure {
     Set( $a, $b );
 }
+multi sub infix:<(|)> (Range:D $a, SetOfRanges:D $b --> Set ) is export is pure {
+    my @out;
+
+    my @check = $b.keys.list.sort( { $^a.min <=> $^b.min } );
+    note "{@check.perl}";
+    while @check {
+        my $range = @check.pop;
+        note "{$range.perl} : {@check.perl}";
+        if ( $range.max >= $a.min && $a.max >= $range.min ) {
+            @check.push( minmax($a, $range) ); 
+        } else {
+            @out.push( $range );
+        }
+    }
+    Set( @out );
+}
+multi sub infix:<(|)> (SetOfRanges:D $a, Range:D $b --> Set ) is export is pure {
+    $b (|) $a;
+}
 multi sub infix:<∪> (Range:D $a, Range $b --> Set ) is export is pure {
     $a (|) $b;
 }
+multi sub infix:<∪> (Range:D $a, SetOfRanges $b --> Set ) is export is pure {
+    $a (|) $b;
+}
+multi sub infix:<∪> (SetOfRanges:D $a, Range $b --> Set ) is export is pure {
+    $b (|) $a;
+}
+
 
 multi sub infix:<(&)> (Range:D $a, Range:D $b --> Range ) is export {
     3..5;

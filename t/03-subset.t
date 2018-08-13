@@ -1,6 +1,7 @@
 use v6.c;
 use Test;
 use Range::SetOps;
+plan 228;
 
 my @equal = [
     [ (1..3), (1..3) ],
@@ -77,7 +78,4 @@ for @no-intersection -> [ $a, $b ] {
     ok $b !(>=) $a, "ok {$b.perl} !(>=) {$a.perl}";
     ok $b ⊈ $a, "ok {$b.perl} ⊈ {$a.perl}";
 }
-
-
-done-testing;
 
