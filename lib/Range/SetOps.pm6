@@ -47,6 +47,9 @@ The following operators already work for continuous Ranges as expected.
 The following Operations will return Sets comprising one or more Ranges.
 When the Ranges within the Set overlap they will be combined into one larger Range.
 
+=item (|)
+=item ∪
+
 =head1 AUTHOR
 
 Simon Proctor <simon.proctor@gmail.com>
@@ -113,29 +116,39 @@ multi sub infix:<∋> (SetOfRanges:D \a, Any:D \b --> Bool ) is export is pure {
 multi sub infix:<∌> (SetOfRanges:D \a, Any:D \b --> Bool ) is export is pure { b !(elem) a; }
 
 
-multi sub infix:<(|)> (Range:D $a, Range $b where $a (<=) $b --> Set ) is export is pure {
-    Set( \($b) );
+multi sub infix:<(|)>  (Range:D $a, Range $b where $a (<=) $b --> Set ) is export is pure {
+     Set( \($b) );
 }
 multi sub infix:<(|)> (Range:D $a, Range $b where $b (<) $a --> Set ) is export is pure {
-    Set( \($a) );
+     Set( \($a) );
 }
 multi sub infix:<(|)> (Range:D $a, Range $b --> Set ) is export is pure {
     Set( $a, $b );
 }
-multi sub infix:<(|)> (Range:D $a, SetOfRanges:D $b --> Set ) is export is pure {
+multi sub infix:<(|)> (**@r ( Range $h is copy, *@rest where { $_.all ~~ Range } ) --> Set ) is assoc<list> is export is pure {
+    my $out = Set( [$h] );
+    for @rest -> $range {
+        $out = $out (|) $range;
+    }
+    $out;
+}
+multi sub infix:<∪> (**@r (Range $h, *@rest where { $_.all ~~ Range } ) --> Set ) is assoc<list> is export is pure {
+    [(|)] @r;
+}
+
+multi sub infix:<(|)> (Range:D $a is copy, SetOfRanges:D $b --> Set ) is export is pure {
     my @out;
 
     my @check = $b.keys.list.sort( { $^a.min <=> $^b.min } );
-    note "{@check.perl}";
     while @check {
         my $range = @check.pop;
-        note "{$range.perl} : {@check.perl}";
         if ( $range.max >= $a.min && $a.max >= $range.min ) {
-            @check.push( minmax($a, $range) ); 
+            $a = minmax($a, $range);
         } else {
             @out.push( $range );
         }
     }
+    @out.push( $a );
     Set( @out );
 }
 multi sub infix:<(|)> (SetOfRanges:D $a, Range:D $b --> Set ) is export is pure {
@@ -152,6 +165,6 @@ multi sub infix:<∪> (SetOfRanges:D $a, Range $b --> Set ) is export is pure {
 }
 
 
-multi sub infix:<(&)> (Range:D $a, Range:D $b --> Range ) is export {
-    3..5;
-}
+#multi sub infix:<(&)> (Range:D $a, Range:D $b --> Range ) is export {
+#    3..5;
+#}

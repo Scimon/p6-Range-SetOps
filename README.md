@@ -61,6 +61,10 @@ The following operators already work for continuous Ranges as expected.
 
 The following Operations will return Sets comprising one or more Ranges. When the Ranges within the Set overlap they will be combined into one larger Range.
 
+  * (|)
+
+  * ∪
+
 AUTHOR
 ======
 
