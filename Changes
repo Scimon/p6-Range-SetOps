@@ -2,4 +2,7 @@ Revision history for Range-SetOps
 
 {{$NEXT}}
     - Initial version
-    - All Boolean returning Operators implemented. 
+    - All Boolean returning Operators implemented.
+    - Range Unions Implemented
+    - Sets of Ranges handled.
+    - Intersections started but currently commented out.
