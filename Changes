@@ -1,6 +1,8 @@
 Revision history for Range-SetOps
 
 {{$NEXT}}
+
+0.0.1  2018-08-15T12:23:27+01:00
     - Initial version
     - All Boolean returning Operators implemented.
     - Range Unions Implemented
