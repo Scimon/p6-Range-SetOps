@@ -19,7 +19,7 @@ The standard Set operators work on Ranges by first converting them to lists and 
 IMPLEMENTED OPERATORS
 =====================
 
-The following operators have been implemented for continous numerical ranges and also tested on string and date range.
+The following operators have been implemented for continous numerical ranges and also tested on string and date range. They also work on Sets of Ranges like those returned by the (|) or ∪ operators.
 
   * (elem)
 

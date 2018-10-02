@@ -57,7 +57,6 @@ my @no-intersection = [
       [ (2.5..3.1), (3.2..5.2) ],
       [ ("a".."t"), ("s".."z") ],
       [ (Date.new("2018-02-01")..Date.new("2018-10-09")), (Date.new("2018-10-10")..Date.new("2018-12-31")) ],
-    
 ];
 
 for @no-intersection -> [ $a, $b ] {
