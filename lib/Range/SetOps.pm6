@@ -335,6 +335,68 @@ multi sub infix:<∪> (
     $b (|) $a;
 }
 
-#multi sub infix:<(&)> (Range:D $a, Range:D $b --> Range ) is export {
-#    3..5;
-#}
+multi sub infix:<(&)> (
+    Range:D $a is copy,
+    SetOfRanges:D $b --> Set
+) is export is pure {
+    my @out;
+
+    my @check = $b.keys.list.sort( { $^a.min <=> $^b.min } );
+    note "{$a.perl} : {@check.perl}";
+    while @check {
+        my $range = @check.pop;
+        if ( $range.max >= $a.min && $a.max >= $range.min ) {
+            $a = Range.new(max($a.min,$range.min), min($a.max,$range.max));
+        } else {
+            $a = Inf..-Inf;
+        }
+    }
+    @out.push( $a ) if $a.min < $a.max;
+    Set( @out );
+}
+
+multi sub infix:<∩> (
+    Range:D $a is copy,
+    SetOfRanges:D $b --> Set
+) is export is pure {
+    $a (&) $b;
+}
+
+sub intersect-ranges(
+    @r where { $_.all ~~ Range } --> Set
+) is pure {
+    my @ordered = @r.sort( { $^a.min <=> $^b.min } );
+    my $h = @ordered.shift;
+
+    my $out = Set( [$h] );
+    for @ordered -> $range {
+        $out = $range (&) $out;
+    }
+    $out;
+}
+
+multi sub infix:<(&)> (
+    **@r where { $_.all ~~ Range } --> Set
+) is assoc<list> is export is pure {
+    intersect-ranges(@r);
+}
+
+multi sub infix:<(&)> (
+    Range $a,
+    Range $b --> Set
+) is export is pure {
+    intersect-ranges([$a,$b]);
+}
+
+multi sub infix:<∩> (
+    Range $a,
+    Range $b --> Set
+) is export is pure {
+    [(&)] $a, $b;
+}
+
+multi sub infix:<∩> (
+    **@r where { $_.all ~~ Range } --> Set
+) is assoc<list> is export is pure {
+    [(&)] @r;
+}
