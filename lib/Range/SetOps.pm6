@@ -263,7 +263,11 @@ multi sub infix:<∪> (
 sub union-ranges(
     @r where { $_.all ~~ Range } --> Set
 ) is pure {
-    my @ordered = @r.sort( { $^a.min <=> $^b.min } );
+    my &sort = do {
+        @r.any.min ~~ Str ?? &infix:<leg> !! &infix:«<=>»;
+    };
+    
+    my @ordered = @r.sort( { &sort( $^a.min, $^b.min ) } );
     my $h = @ordered.shift;
 
     my $out = Set( [$h] );
@@ -279,10 +283,19 @@ multi sub infix:<(|)> (
 ) is export is pure {
     my @out;
 
-    my @check = $b.keys.list.sort( { $^a.min <=> $^b.min } );
+    my ( &sort, &range-check ) = do {
+        $a.min ~~ Str
+        ?? ( &infix:<leg>, &infix:<ge> )
+        !! ( &infix:«<=>», &infix:«>=» );
+    }
+
+    my @check = $b.keys.list.sort( { &sort( $^a.min, $^b.min ) } );
     while @check {
         my $range = @check.pop;
-        if ( $range.max >= $a.min && $a.max >= $range.min ) {
+        if (
+            &range-check( $range.max, $a.min ) &&
+            &range-check( $a.max, $range.min )
+        ) {
             $a = minmax($a, $range);
         } else {
             @out.push( $range );
@@ -342,7 +355,6 @@ multi sub infix:<(&)> (
     my @out;
 
     my @check = $b.keys.list.sort( { $^a.min <=> $^b.min } );
-    note "{$a.perl} : {@check.perl}";
     while @check {
         my $range = @check.pop;
         if ( $range.max >= $a.min && $a.max >= $range.min ) {
