@@ -55,6 +55,8 @@ Range.
 
 =item (|)
 =item ∪
+=item (&)
+=item ∩
 
 =head1 AUTHOR
 
