@@ -1,6 +1,7 @@
 Revision history for Range-SetOps
 
 {{$NEXT}}
+    - Intersections working with String and Numeric Ranges. Should work with dates. Needs tests.
     - Unions working for String and Numeric ranges with tests
     - Unions updated to handle Sets of Ranges.
 
