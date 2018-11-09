@@ -65,6 +65,10 @@ The following Operations will return Sets comprising one or more Ranges. When th
 
   * ∪
 
+  * (&)
+
+  * ∩
+
 AUTHOR
 ======
 
