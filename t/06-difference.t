@@ -3,9 +3,9 @@ use Test;
 use Range::SetOps;
 
 my @intersections = [
-    [[(1..5),(3..10)], Set([$(3..5)])],
-    [[(1..3),(4..10)], Set.new()],
-    [[(1..3),Set($(1..7),$(2..3))], Set([$(2..3)])],
+    [[(1..5),(3..10)], Set([$(1..^3)])],
+    [[(1..3),(4..10)], Set([$(1..3)])],
+    [[(1..3),Set($(1..7),$(2..3))], Set.new()],
 
     [[(1.1..5),(3.1..10)], Set([$(3.1..5)])],
     [[(1.1..3),(4.1..10)], Set.new()],
@@ -23,10 +23,10 @@ my @intersections = [
 ];
 
 for @intersections -> [@list, $expect] {
-    my $got = [(&)] @list;
-    is-deeply( $got, $expect, "[(&)] {@list.perl} == {$expect.perl}" );
-    $got = [∩] @list;
-    is-deeply( $got, $expect, "[∩] {@list.perl} == {$expect.perl}" );
+    my $got = [(-)] @list;
+    is-deeply( $got, $expect, "[(-)] {@list.perl} == {$expect.perl}" );
+    $got = [∖] @list;
+    is-deeply( $got, $expect, "[∖] {@list.perl} == {$expect.perl}" );
 }
 
 done-testing;
