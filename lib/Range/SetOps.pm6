@@ -1,5 +1,5 @@
 use v6;
-unit class Range::SetOps:ver<0.0.3>:auth<cpan:SCIMON>;
+unit class Range::SetOps:ver<0.0.4>:auth<zef:Scimon>;
 
 =begin pod
 
